@@ -1,160 +1,181 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+from highrise import BaseBot, Position
+from highrise.models import SessionMetadata, User
+from highrise import __main__
+from asyncio import run as arun
+import random
 
-# C extensions
-*.so
+class Bot(BaseBot):
+    dancs = ["idle-loop-sitfloor", "emote-tired", "emoji-thumbsup", "emoji-angry", "dance-macarena", "emote-hello", "dance-weird", "emote-superpose", "idle-lookup", "idle-hero", "emote-wings", "emote-laughing", "emote-kiss", "emote-wave", "emote-hearteyes", "emote-theatrical", "emote-teleporting", "emote-slap", "emote-ropepull", "emote-think", "emote-hot", "dance-shoppingcart", "emote-greedy", "emote-frustrated", "emote-float", "emote-baseball", "emote-yes", "idle_singing", "idle-floorsleeping", "idle-enthusiastic", "emote-confused", "emoji-celebrate", "emote-no", "emote-swordfight", "emote-shy", "dance-tiktok2", "emote-model", "emote-charging", "emote-snake", "dance-russian", "emote-sad", "emote-lust", "emoji-cursing", "emoji-flex", "emoji-gagging", "dance-tiktok8", "dance-blackpink", "dance-pennywise", "emote-bow", "emote-curtsy", "emote-snowball", "emote-snowangel", "emote-telekinesis", "emote-maniac", "emote-energyball", "emote-frog", "emote-cute", "dance-tiktok9", "dance-tiktok10", "emote-pose7", "emote-pose8", "idle-dance-casual", "emote-pose1", "emote-pose3", "emote-pose5", "emote-cutey","emote-Relaxing","emote-model","emote-cursty"]
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+    async def on_start(self, session_metadata: SessionMetadata) -> None:
+        print("hi im alive?")
+        self.highrise.tg.create_task(self.highrise.teleport(
+            session_metadata.user_id, Position(17, 1,5 , "FrontLeft")))
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+    async def on_user_join(self, user: User) -> None:
+         await self.highrise.chat(f"ادخل يبن قلبي ❤️   {user.username}!")
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-cover/
 
-# Translations
-*.mo
-*.pot
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
 
-# Flask stuff:
-instance/
-.webassets-cache
+  
+    async def on_whisper(self, user: User, message: str) -> None:
+        """On a received room whisper."""
+        if message.startswith('اثير') and user.username == "60W":
+            try:
+                xxx = message[2:]
+                await self.highrise.chat(xxx)
+                await self.highrise.send_emote('dance-breakdance')
+            except:
+                print("error 3")
+            pass
 
-# Scrapy stuff:
-.scrapy
+    async def on_chat(self, user: User, message: str) -> None:
+        """On a received room-wide chat."""
+        if "وي" in message:
+            try:
+                emote_id = "emote-float"
+                await self.highrise.send_emote(emote_id, user.id)
+            except:
+                print("error 3")
 
-# Sphinx documentation
-docs/_build/
+        if "هو هو" in message:
+            try:
+                emote_id = "dance-pennywise"
+                await self.highrise.send_emote(emote_id, user.id)
+            except:
+                print("error 3")
 
-# PyBuilder
-.pybuilder/
-target/
+        if "تي" in message:
+            try:
+                emote_id = "emote-curtsy"
+                await self.highrise.send_emote(emote_id, user.id)
+            except:
+                print("error 3")
 
-# Jupyter Notebook
-.ipynb_checkpoints
+        if "وسع " in message:
+            try:
+                emote_id = "emote-teleporting"
+                await self.highrise.send_emote(emote_id, user.id)
+            except:
+                print("error 3")
+      
+        if "هوت" in message:
+            try:
+                emote_id = "emote-hot"
+                await self.highrise.send_emote(emote_id, user.id)
+            except:
+                print("error 3")
+        if "بوسه" in message:
+            try:
+                emote_id = "emote-kiss"
+                await self.highrise.send_emote(emote_id, user.id)
+            except:
+                print("error 3")
+        
+        if "ولكم" in message:
+            try:
+                emote_id = "emote-bow"
+                await self.highrise.send_emote(emote_id, user.id)
+            except:
+                print("error 3")
 
-# IPython
-profile_default/
-ipython_config.py
+        if "واكا" in message:
+            try:
+                emote_id = "dance-weird"
+                await self.highrise.send_emote(emote_id, user.id)
+            except:
+                print("error 3")
+         
+        if "خد" in message:
+            try:
+                emote_id = "emote-snowball"
+                await self.highrise.send_emote(emote_id, user.id)
+            except:
+                print("error 3")
 
-# pyenv
-#   For a library or package, you might want to ignore these files since the code is
-#   intended to run in multiple environments; otherwise, check them in:
-# .python-version
+        if "ودي" in message:
+            try:
+                emote_id = "idle_singing"
+                await self.highrise.send_emote(emote_id, user.id)
+            except:
+                print("error 3")
+      
+        if "." in message:
+            try:
+                emote_id = "dance-blackpink"
+                await self.highrise.send_emote(emote_id, user.id)
+            except:
+                print("error 3")
+      
+        if "رقصني" in message:
+            try:
+                emote_id = random.choice(self.dancs)
+                await self.highrise.send_emote(emote_id,user.id)
+            except:
+              print(f"{emote_id}")
+              
+        if "نزلني" in message:
+            try:
+                await self.highrise.teleport(f"{user.id}", Position(7, 1, 7))
+            except:
+                print("error 3")
 
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-#Pipfile.lock
+        if "طلعني" in message:
+            try:
+                await self.highrise.teleport(f"{user.id}", Position(6, 9, 4))
+            except:
+                print("error 3")
+        if "فوق" in message:
+            try:
+                await self.highrise.teleport(f"{user.id}", Position(14, 18, 4))
+            except:
+                print("error 3")
 
-# poetry
-#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
-#poetry.lock
+        if "FF" in message or "fly" in message:
+            try:
+                kl = Position(random.randint(1, 19), random.randint(1, 15), random.randint(1, 19))
+                await self.highrise.teleport(f"{user.id}", kl)
+            except:
+                print("error 3")
 
-# pdm
-#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
-#pdm.lock
-#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
-#   in version control.
-#   https://pdm.fming.dev/#use-with-ide
-.pdm.toml
+        
 
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
-__pypackages__/
+    async def on_channel(self, sender_id: str, message: str, tags: set[str]) -> None:
+        """On a hidden channel message."""
+        pass
 
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
+    async def on_user_move(self, user: User, pos: Position) -> None:
+        """On a user moving in the room."""
+        if user.username == "_AnGeL_":
+            await self.highrise.send_emote('idle-hero')
+            print(pos)
+            # التعامل مع حالة عدم وجود نص في pos
+            facing = pos.facing
+            print(type(pos))
+            x = pos.x
+            y = pos.y
+            z = pos.z
+            facing = pos.facing
+            await self.highrise.walk_to(Position(x - 5, y, z - 5, facing))
+            print(user.username, pos)
+        pass
 
-# SageMath parsed files
-*.sage.py
+    async def is_admin(self, user: User):
+        if user.id == self.BOT_ADMINISTRATOR_ID and user.username == self.BOT_ADMINISTRATOR:
+            return True
+        if user.id == '63f3de01870f670533de240e' and user.username == '60W':
+            return True
+        return False
 
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+    async def run(self, room_id, token) -> None:
+        await __main__.main(self, room_id, token)
 
-# Spyder project settings
-.spyderproject
-.spyproject
 
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# pytype static type analyzer
-.pytype/
-
-# Cython debug symbols
-cython_debug/
-
-# PyCharm
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
+if __name__ == "__main__":
+    room_id = "650050e7997a6c7df1659ed8"
+    token = "11abf2b45fc3eadfdde66451af7f1e5b5567c64a0d25398084eb26c45ce6403a"
+    arun(Bot().run(room_id, token))
+    arun(Bot().run(room_id, token))
+    
